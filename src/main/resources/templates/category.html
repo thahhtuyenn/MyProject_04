@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragment::header}">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <div th:replace="~{fragment::sidebar}"></div>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <div th:replace="~{fragment::topbar}"></div>
+
+
+                <div class="container-fluid">
+                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <p th:class="'alert alert-' + ${type}" > [[${message}]] </p>
+                    <!-- Begin Page Content -->
+                    <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center;" >
+                        <h6 class="m-0 font-weight-bold text-primary">Category</h6>
+                        <a th:href="@{/categories/edit}" class="btn btn-info"> Add </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr th:each="category, item : ${categories}">
+                                    <td>[[${item.count}]]</td>
+                                    <td th:text="${category.name}"></td>
+                                    <td th:text="${category.description}"></td>
+                                    <td>
+                                        <a th:if="${category._active}" class="btn btn-warning" th:href="@{/categories/disable(categoryId=${category.id})}">Disable</a>
+                                        <a th:if="${!category._active}" class="btn btn-primary" th:href="@{/categories/enable(categoryId=${category.id})}">Enable</a>
+                                        <a th:href="@{/categories/edit(categoryId = ${category.id})}" class="btn btn-info">Edit</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- /.container-fluid -->
+                </div>
+
+            </div>
+            <!-- End of Main Content -->
+
+            <div th:replace="~{fragment::footer}"></div>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+    <div th:replace="~{fragment::script}">
+
+    </div>
+
+</body>
+
+</html>

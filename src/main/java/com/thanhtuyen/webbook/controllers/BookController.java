@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/books")
+@RequestMapping("/admin/books")
 @Slf4j
 public class BookController {
     @Autowired

@@ -45,18 +45,18 @@ public class UserConfiguration {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .requestMatchers("/*")
+                .requestMatchers("/login/**", "/home/**")
                 .permitAll()
                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/do-login")
-                .defaultSuccessUrl("/admin/dashboard").permitAll()
+                .defaultSuccessUrl("/home").permitAll()
                 .and()
                 .logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login").permitAll()
+                .logoutSuccessUrl("/login?logout").permitAll()
                 .and().httpBasic().disable();
         return httpSecurity.build();
     }
